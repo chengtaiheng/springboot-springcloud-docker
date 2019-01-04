@@ -18,3 +18,12 @@ run-container脚本中已为大家创建好。
 </Map>
 
 结果
+
+新增 通过docker部署elk（elasticsearch，logstash，kibana）
+镜像构建脚本还是用refactor.sh
+在项目根目录下输入docker-compose up
+流程如下
+1.运行refactor.sh脚本，自动打包，构建镜像。
+2.在项目根目录下运行docker-compose up命令，构建项目镜像以及logstash镜像
+3.下面请访问https://www.jianshu.com/p/817b5b50ec9a，查看详情。
+
