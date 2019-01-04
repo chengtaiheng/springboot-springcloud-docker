@@ -1,0 +1,65 @@
+version: "3.5"
+
+services:
+
+  #--------------------------------------------------------------
+  #服务治理
+  #--------------------------------------------------------------
+  springcloud_eureka:
+    image: "chth/springboot-springcloud-docker-eurake:1.0.0"
+    restart: "always"
+    container_name: "docker_project_eureka"
+    ports:
+    - "1668:1668"   
+    volumes:
+    - "${PWD}/../logs:/chth"
+    env_file:
+    - ${PWD}/env.sh
+
+  #--------------------------------------------------------------
+  #微服务
+  springcloud_service :
+    image: "chth/springboot-springcloud-docker-service:1.0.0"
+    restart: "always"
+    container_name: "docker_project_service"
+    links:
+    - "springcloud_eureka:eureka"        
+    ports:  
+    - "1667:1667"
+    volumes:
+    - "${PWD}/../logs:/chth"
+    env_file:
+    - ${PWD}/env.sh
+  
+  #--------------------------------------------------------------
+  #表观层
+  #--------------------------------------------------------------
+  springcloud_front:       
+    image: "chth/springboot-springcloud-docker-front:1.0.0"
+    restart: "always"
+    container_name: "docker_project_front"
+    links:
+    - "springcloud_eureka:eureka"
+    ports:  
+    - "1669:1669"
+    volumes:
+    - "${PWD}/../logs:/chth"
+    env_file:
+    - ${PWD}/env.sh
+   
+  #--------------------------------------------------------------
+  #KIBANA
+  #--------------------------------------------------------------
+  tool_logstash:
+    image: "logstash:6.5.4"
+    restart: "no"
+    container_name: "docker_project_logstash"
+    volumes:
+    - "${PWD}/../logs:/logs/"
+    - "${PWD}/logstash-conf/:/logstash_dir/"
+    - "${PWD}/logstash_yml/:/config/"
+    command: "logstash -f /logstash_dir/logstash.conf"      
+networks:
+  default:
+    external:
+      name: tiger

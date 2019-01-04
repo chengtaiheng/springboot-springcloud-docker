@@ -60,8 +60,12 @@
                 <scope>provided</scope>
             </dependency>
 
-
-            <!-- https://mvnrepository.com/artifact/com.jacob/jacob -->
+            <!-- logstash -->
+            <dependency>
+                <groupId>net.logstash.logback</groupId>
+                <artifactId>logstash-logback-encoder</artifactId>
+                <version>5.2</version>
+            </dependency>
 
 
             <!--feign-->
