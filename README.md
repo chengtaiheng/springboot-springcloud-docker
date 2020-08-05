@@ -25,5 +25,5 @@ run-container脚本中已为大家创建好。
 流程如下
 1.运行refactor.sh脚本，自动打包，构建镜像。
 2.在项目根目录下运行docker-compose up命令，构建项目镜像以及logstash镜像
-3.下面详情请查看https://www.jianshu.com/p/817b5b50ec9a。
+3.下面详情请查看https://www.jianshu.com/p/817b5b50ec9a
 
